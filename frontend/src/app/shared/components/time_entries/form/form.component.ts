@@ -22,6 +22,7 @@ import { SchemaResource } from 'core-app/features/hal/resources/schema-resource'
 @Component({
   templateUrl: './form.component.html',
   selector: 'te-form',
+  styleUrls: ['./form.component.sass'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -38,6 +39,7 @@ export class TimeEntryFormComponent extends UntilDestroyedMixin implements OnIni
 
   text = {
     wpRequired: this.i18n.t('js.time_entry.work_package_required'),
+    startTimer: this.i18n.t('js.time_entry.start_timer'),
   };
 
   public workPackageSelected = false;

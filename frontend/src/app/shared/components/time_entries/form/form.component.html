@@ -22,11 +22,19 @@
          [ngClass]="{'-required': isRequired('spentOn')}"
          [textContent]="schema.spentOn.name">
     </div>
-    <div class="attributes-map--value attributes-map--value_overflow">
+    <div class="attributes-map--value attributes-map--value_overflow time-entries-form--date">
       <op-editable-attribute-field [resource]="entry"
                                 [wrapperClasses]="'-tiny'"
-                                [fieldName]="'spentOn'">
+                                [fieldName]="'spentOn'"
+                                class="time-entries-form--date-field">
       </op-editable-attribute-field>
+
+      <a
+        [attr.href]=""
+        class="time-entries-form--start-timer spot-body-small"
+        target=”_blank”>
+        {{ text.startTimer }}
+      </a>
     </div>
 
     <div class="attributes-map--key"
