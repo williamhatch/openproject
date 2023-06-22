@@ -26,6 +26,24 @@
             [stateName$]="stateName$">
           </wp-create-button>
         </li>
+        <li class="toolbar-item action_menu_main" id="action-start-timer">
+          <button
+            *ngIf="!timerStarted"
+            class="button -icon-only toolbar-icon"
+            [attr.title]="text.fullView.startTimer"
+            (click)="startTimer()"
+          >
+            <span class="spot-icon spot-icon_play"></span>
+          </button>
+          <button
+            *ngIf="timerStarted"
+            class="button -icon-only toolbar-icon"
+            [attr.title]="text.fullView.stopTimer"
+            (click)="startTimer()"
+          >
+          <span class="spot-icon spot-icon_remove"></span>
+        </button>
+        </li>
         <li class="toolbar-item" *ngIf="displayWatchButton">
           <wp-watcher-button
             [workPackage]="workPackage"

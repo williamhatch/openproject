@@ -42,6 +42,8 @@ import {
 } from 'core-app/features/work-packages/services/notifications/work-package-notification.service';
 import { WpSingleViewService } from 'core-app/features/work-packages/routing/wp-view-base/state/wp-single-view.service';
 import { CommentService } from 'core-app/features/work-packages/components/wp-activity/comment-service';
+import { TimeEntryCreateService } from 'core-app/shared/components/time_entries/create/create.service';
+import * as moment from 'moment';
 
 @Component({
   templateUrl: './wp-full-view.html',
@@ -62,9 +64,13 @@ export class WorkPackagesFullViewComponent extends WorkPackageSingleViewBase imp
 
   public watchers:any;
 
+  public timerStarted = false;
+
   public text = {
     fullView: {
       buttonMore: this.i18n.t('js.button_more'),
+      startTimer: this.i18n.t('js.time_entry.start_timer'),
+      stopTimer: this.i18n.t('js.time_entry.stop_timer'),
     },
   };
 
@@ -74,6 +80,7 @@ export class WorkPackagesFullViewComponent extends WorkPackageSingleViewBase imp
     public injector:Injector,
     public wpTableSelection:WorkPackageViewSelectionService,
     readonly $state:StateService,
+    readonly timeEntryCreateService:TimeEntryCreateService,
     // private readonly i18n:I18nService,
   ) {
     super(injector, $state.params.workPackageId);
@@ -90,6 +97,12 @@ export class WorkPackagesFullViewComponent extends WorkPackageSingleViewBase imp
     this.wpTableFocus.updateFocus(this.workPackage.id!);
 
     this.setWorkPackageScopeProperties(this.workPackage);
+  }
+
+  public startTimer(){
+    this.timerStarted = true;
+    const today = moment(new Date());
+    this.timeEntryCreateService.createNewTimeEntry(today,this.workPackage,true);
   }
 
   private setWorkPackageScopeProperties(wp:WorkPackageResource) {

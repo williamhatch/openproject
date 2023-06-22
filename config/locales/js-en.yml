@@ -794,6 +794,7 @@ en:
       work_package_required: 'Requires selecting a work package first.'
       title: 'Log time'
       start_timer: 'Start timer'
+      stop_timer: 'Stop timer'
 
     two_factor_authentication:
       label_two_factor_authentication: 'Two-factor authentication'
