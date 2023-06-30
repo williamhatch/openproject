@@ -27,7 +27,7 @@
 #++
 
 require 'open_project/plugins'
-require_relative './patches/api/work_package_representer'
+require_relative 'patches/api/work_package_representer'
 
 module OpenProject::GithubIntegration
   class Engine < ::Rails::Engine
@@ -83,9 +83,13 @@ module OpenProject::GithubIntegration
       mount ::API::V3::GithubPullRequests::GithubPullRequestsAPI
     end
 
-    config.to_prepare do
-      # Register the cron job to clean up old github pull requests
-      ::Cron::CronJob.register! ::Cron::ClearOldPullRequestsJob
+    add_cron_jobs do
+      {
+        ClearOldPullRequestsJob: {
+          cron: '25 1 * * *', # runs at 1:25 nightly
+          class: 'ClearOldPullRequestsJob'
+        }
+      }
     end
   end
 end
