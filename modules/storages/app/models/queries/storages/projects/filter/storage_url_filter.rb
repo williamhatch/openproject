@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #-- copyright
 # OpenProject is an open source project management software.
 # Copyright (C) 2012-2023 the OpenProject GmbH
@@ -25,34 +27,18 @@
 #
 # See COPYRIGHT and LICENSE files for more details.
 #++
+module Queries::Storages::Projects::Filter
+  class StorageUrlFilter < ::Queries::Projects::Filters::ProjectFilter
+    include StorageFilterMixin
 
-module OpPrimer
-  class GridLayoutComponent < Primer::Component
-    attr_reader :css_class
+    private
 
-    def initialize(css_class, **args)
-      super
-
-      @css_class = css_class
-      @system_arguments = args
-      @system_arguments[:classes] = class_names(
-        @system_arguments[:classes],
-        css_class
-      )
+    def filter_column
+      'host'
     end
 
-    renders_many :areas, lambda { |area_name, component = ::Primer::BaseComponent, **sysargs, &block|
-      styles = [
-        "grid-area: #{area_name}",
-        sysargs[:justify_self] ? "justify-self: #{sysargs[:justify_self]}" : nil,
-      ]
-      sysargs[:style] = join_style_arguments(sysargs[:style], *styles)
-      sysargs[:classes] = class_names(
-        sysargs[:classes],
-        "#{css_class}--#{area_name}"
-      )
-
-      render(component.new(**sysargs), &block)
-    }
+    def where_values
+      values.map { |host| CGI.unescape(host).gsub(/\/+$/, '') }
+    end
   end
 end
