@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #-- copyright
 # OpenProject is an open source project management software.
 # Copyright (C) 2012-2023 the OpenProject GmbH
@@ -137,7 +139,7 @@ RSpec.describe Groups::CleanupInheritedRolesService, 'integration', type: :model
         .not_to eql(Member.find_by(id: first_user_member.id).updated_at)
 
       expect(first_user_member.reload.roles)
-        .to match_array([another_role, another_global_role])
+        .to contain_exactly(another_role, another_global_role)
     end
 
     it 'sends a notification on the kept membership' do
@@ -180,7 +182,7 @@ RSpec.describe Groups::CleanupInheritedRolesService, 'integration', type: :model
         .not_to eql(Member.find_by(id: first_user_member.id).updated_at)
 
       expect(first_user_member.reload.roles)
-        .to match_array([role, global_role])
+        .to contain_exactly(role, global_role)
     end
 
     it 'sends a notification on the kept membership' do
@@ -219,7 +221,7 @@ RSpec.describe Groups::CleanupInheritedRolesService, 'integration', type: :model
       service_call
 
       expect(Member.find_by(principal: users.last).roles)
-        .to match_array([role])
+        .to contain_exactly(role)
     end
 
     it 'sends no notifications' do
