@@ -137,8 +137,8 @@ class WorkPackage < ApplicationRecord
 
   acts_as_watchable
 
-  after_validation :set_attachments_error_details,
-                   if: lambda { |work_package| work_package.errors.messages.has_key? :attachments }
+  # after_validation :set_attachments_error_details,
+  #                  if: lambda { |work_package| work_package.errors.messages.has_key? :attachments }
   before_save :close_duplicates, :update_done_ratio_from_status
   before_create :default_assign
 
