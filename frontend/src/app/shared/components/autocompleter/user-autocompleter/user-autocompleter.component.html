@@ -1,6 +1,5 @@
 <op-autocompleter
   [model]="value"
-  [openDirectly]="true"
   [getOptionsFn]="getAvailableUsers.bind(this)"
   [trackByFn]="userTracker"
   [multiple]="multiple"
@@ -33,12 +32,3 @@
     ></op-invite-user-button>
   </ng-template>
 </op-autocompleter>
-
-<input
-  #hiddenInput
-  [name]="name"
-  type="hidden"
-  [value]="plainValue"
-  data-members-form-target="memberUserIds"
-  data-action="change->members-form#triggerLimitWarningIfReached"
-/>
