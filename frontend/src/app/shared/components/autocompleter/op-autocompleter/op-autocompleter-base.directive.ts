@@ -61,6 +61,15 @@ export abstract class OpAutocompleterBaseDirective<T extends IAutocompleteItem =
   // <label> tags that have `for=""` set
   @Input() public labelForId = '';
 
+  // Name of the hidden input
+  @Input() public inputName?:string;
+
+  // Initial value of the hidden/selected input
+  @Input() public inputValue?:string;
+
+  // Property to bind to the hidden input
+  @Input() public inputBindValue = 'id';
+
   @Input() public appendTo = '';
 
   @Input() public multiple = false;

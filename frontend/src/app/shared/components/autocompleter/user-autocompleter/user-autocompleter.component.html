@@ -1,5 +1,8 @@
 <op-autocompleter
   [model]="value"
+  [inputName]="inputName"
+  [inputValue]="inputValue"
+  [inputBindValue]="inputBindValue"
   [getOptionsFn]="getAvailableUsers.bind(this)"
   [trackByFn]="userTracker"
   [multiple]="multiple"
