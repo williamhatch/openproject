@@ -93,6 +93,11 @@ export abstract class OpAutocompleterBaseDirective<T extends IAutocompleteItem =
     populateInputsFromDataset(this);
   }
 
+  valueSelected(value:T|null) {
+    this.writeValue(value);
+    this.valueChange.emit(value);
+  }
+
   writeValue(value:T|null):void {
     this.value = value;
   }
